@@ -498,7 +498,7 @@ var Stream = /** @class */ (function () {
         }
         if (shortYear) {
             // to avoid querying the timer, use the fixed range [1970, 2069]
-            // it will conform with ITU X.400 [-10, +40] sliding window until 2030
+            // it will conform with ITU X.400 [-10, +40] sliding global until 2030
             m[1] = +m[1];
             m[1] += (+m[1] < 70) ? 2000 : 1900;
         }
@@ -2748,10 +2748,10 @@ if (rng_pool == null) {
     rng_pool = [];
     rng_pptr = 0;
     var t = void 0;
-    if (window.crypto && window.crypto.getRandomValues) {
+    if (global.crypto && global.crypto.getRandomValues) {
         // Extract entropy (2048 bits) from RNG if available
         var z = new Uint32Array(256);
-        window.crypto.getRandomValues(z);
+        global.crypto.getRandomValues(z);
         for (t = 0; t < z.length; ++t) {
             rng_pool[rng_pptr++] = z[t] & 255;
         }
@@ -2761,11 +2761,11 @@ if (rng_pool == null) {
     var onMouseMoveListener_1 = function (ev) {
         this.count = this.count || 0;
         if (this.count >= 256 || rng_pptr >= rng_psize) {
-            if (window.removeEventListener) {
-                window.removeEventListener("mousemove", onMouseMoveListener_1, false);
+            if (global.removeEventListener) {
+                global.removeEventListener("mousemove", onMouseMoveListener_1, false);
             }
-            else if (window.detachEvent) {
-                window.detachEvent("onmousemove", onMouseMoveListener_1);
+            else if (global.detachEvent) {
+                global.detachEvent("onmousemove", onMouseMoveListener_1);
             }
             return;
         }
@@ -2778,11 +2778,11 @@ if (rng_pool == null) {
             // Sometimes Firefox will deny permission to access event properties for some reason. Ignore.
         }
     };
-    if (window.addEventListener) {
-        window.addEventListener("mousemove", onMouseMoveListener_1, false);
+    if (global.addEventListener) {
+        global.addEventListener("mousemove", onMouseMoveListener_1, false);
     }
-    else if (window.attachEvent) {
-        window.attachEvent("onmousemove", onMouseMoveListener_1);
+    else if (global.attachEvent) {
+        global.attachEvent("onmousemove", onMouseMoveListener_1);
     }
 }
 function rng_get_byte() {
@@ -5255,7 +5255,7 @@ var JSEncrypt = /** @class */ (function () {
     return JSEncrypt;
 }());
 
-window.JSEncrypt = JSEncrypt;
+global && global.JSEncrypt = JSEncrypt;
 
 exports.JSEncrypt = JSEncrypt;
 exports.default = JSEncrypt;
