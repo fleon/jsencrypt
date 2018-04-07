@@ -2618,11 +2618,11 @@ function am3(i, x, w, j, c, n) {
     }
     return c;
 }
-if (j_lm && (navigator.appName == "Microsoft Internet Explorer")) {
+if (j_lm && (global.navigator && global.navigator.appName == "Microsoft Internet Explorer")) {
     BigInteger.prototype.am = am2;
     dbits = 30;
 }
-else if (j_lm && (navigator.appName != "Netscape")) {
+else if (j_lm && (global.navigator && global.navigator.appName != "Netscape")) {
     BigInteger.prototype.am = am1;
     dbits = 26;
 }
@@ -3170,7 +3170,7 @@ YAHOO.lang = {
             var _IEEnumFix = function() {},
                 ADD = ["toString", "valueOf"];
             try {
-                if (/MSIE/.test(navigator.userAgent)) {
+                if (/MSIE/.test(global.navigator && global.navigator.userAgent)) {
                     _IEEnumFix = function(r, s) {
                         for (i = 0; i < ADD.length; i = i + 1) {
                             var fname = ADD[i], f = s[fname];
