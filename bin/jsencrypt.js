@@ -5255,7 +5255,7 @@ var JSEncrypt = /** @class */ (function () {
     return JSEncrypt;
 }());
 
-global && global.JSEncrypt = JSEncrypt;
+if (global) global.JSEncrypt = JSEncrypt;
 
 exports.JSEncrypt = JSEncrypt;
 exports.default = JSEncrypt;
